@@ -1,15 +1,63 @@
 'use strict';
+document.addEventListener('DOMContentLoaded', function() {
 
-console.log('Hello World!');
 
-echo "# Calorie_Counting_Web" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/reflectline/Calorie_Counting_Web.git
-    git push -u origin main
+    const tabsParent = document.querySelector('.tabheader__items'), // Контайнер табов
+        tabs = document.querySelectorAll('.tabheader__item'),        // Табы
+        tabsContent = document.querySelectorAll('.tabcontent')       // Текст табов
 
-git remote add origin https://github.com/reflectline/Calorie_Counting_Web.git
-    git branch -M main
-git push -u origin main
+    function hideTabsContent() {                               // Функция для скрытия всех элементов из tabs
+        tabsContent.forEach(item => {
+            item.classList.add('hide');
+            item.classList.remove('show', 'fade');
+        })
+        tabs.forEach(item => {             // Функция для скрытия активного элемента
+            item.classList.remove('tabheader__item_active');
+        })
+    }
+
+    function showTabsContent(i = 0) {          // Функция для отображения элемента tabs
+        tabsContent[i].classList.add('show', 'fade');
+        tabsContent[i].classList.remove('hide');
+        tabs[i].classList.add('tabheader__item_active')
+    }
+
+    hideTabsContent();
+    showTabsContent();
+
+
+    tabsParent.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target && target.classList.contains('tabheader__item')) {
+            tabs.forEach((item, i) => {
+                if (target === item) {
+                    hideTabsContent();
+                    showTabsContent(i);
+                }
+            })
+
+        }
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+})
